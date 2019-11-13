@@ -222,7 +222,7 @@ int main()
 			int iStarCount = 0;
 			int iSaveCount = 0;
 
-			// 가로, 세로 라인 중 가장 *이 많은 줄ㅇ르 찾아낸다.
+			// 가로, 세로 라인 중 가장 *이 많은 줄을 찾아낸다.
 			for (int i = 0; i < 5; ++i)
 			{
 				for (int j = 0; j < 5; ++j)
