@@ -5,7 +5,7 @@ Studying C++ with Assortrock
 어소트락에서 유튜브에 17년 C++ 여름방학특강을 공유해주셨습니다.
 정말 감사드립니다.
 
-This code belongs from Assortrock game academy.
+This code belongs to Assortrock game academy.
 They shared vidoes of 2017 Summer Crash Course in C/C++ on YouTube.
 Thanks for sharing them.
 
