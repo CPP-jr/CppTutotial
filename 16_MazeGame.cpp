@@ -5,14 +5,14 @@
 using namespace std;
 
 /*
-0 : º®
-1 : ±æ
-2 : ½ÃÀÛÁ¡
-3 : µµÂøÁ¡
-4 : ÆøÅº
-5 : ÆÄ¿ö¾ÆÀÌÅÛ
-6 : º®¹Ğ±â ¾ÆÀÌÅÛ
-7 : Åõ¸í¾ÆÀÌÅÛ
+0 : ë²½
+1 : ê¸¸
+2 : ì‹œì‘ì 
+3 : ë„ì°©ì 
+4 : í­íƒ„
+5 : íŒŒì›Œì•„ì´í…œ
+6 : ë²½ë°€ê¸° ì•„ì´í…œ
+7 : íˆ¬ëª…ì•„ì´í…œ
 */
 
 struct _tagPoint
@@ -21,7 +21,7 @@ struct _tagPoint
 	int y;
 };
 
-// typedef : Å¸ÀÔ ÀçÁ¤ÀÇ
+// typedef : íƒ€ì… ì¬ì •ì˜
 typedef _tagPoint	POINT;
 typedef _tagPoint* PPOINT;
 
@@ -36,7 +36,7 @@ typedef struct _tagPlayer
 
 void SetMaze(char Maze[21][21],PPLAYER pPlayer, PPOINT pStartPos, PPOINT pEndPos)
 {
-	// MazeList.txt ÆÄÀÏÀ» ÀĞ¾î¿Í¼­ ¹Ì·Î ¸ñ·ÏÀ» ¸¸µç´Ù.
+	// MazeList.txt íŒŒì¼ì„ ì½ì–´ì™€ì„œ ë¯¸ë¡œ ëª©ë¡ì„ ë§Œë“ ë‹¤.
 	FILE* pFile = NULL;
 
 	fopen_s(&pFile, "MazeList.txt", "rt");
@@ -94,45 +94,45 @@ void Output(char Maze[21][21], PPLAYER pPlayer)
 		for (int j = 0; j < 20; ++j)
 		{
 			if (Maze[i][j] == '4')
-				cout << "¬Ò";
+				cout << "Ğ±";
 
-			else if (pPlayer->tPos.x == j && pPlayer->tPos.y == i) // j°¡ °¡·Î, i°¡ ¼¼·Î
-				cout << "£À";
+			else if (pPlayer->tPos.x == j && pPlayer->tPos.y == i) // jê°€ ê°€ë¡œ, iê°€ ì„¸ë¡œ
+				cout << "ï¼ ";
 
 			else if (Maze[i][j] == '0')
-				cout << "¡á";
+				cout << "â– ";
 
 			else if (Maze[i][j] == '1')
 				cout << "  ";
 
 			else if (Maze[i][j] == '2')
-				cout << "¡Á";
+				cout << "â‰ ";
 
 			else if (Maze[i][j] == '3')
-				cout << "¬¥";
+				cout << "Ğ”";
 
 			else if (Maze[i][j] == '5')
-				cout << "¢Í";
+				cout << "â™¨";
 
 			else if (Maze[i][j] == '6')
-				cout << "¢Ñ";
+				cout << "â˜";
 
 			else if (Maze[i][j] == '7')
-				cout << "¢Æ";
+				cout << "â–’";
 		}
 		
 		cout << endl;
 	}
 
 	cout << endl << "BOMB POWER : " << pPlayer->iBombPower << endl;
-	cout << "WALKING THRU WALLS: "; // º®Åë°ú
+	cout << "WALKING THRU WALLS: "; // ë²½í†µê³¼
 	if (pPlayer->bTransparency)
 		cout << "ON.   ";
 
 	else
 		cout << "OFF.   ";
 
-	cout << "PUSH : "; // º®¹Ğ±â
+	cout << "PUSH : "; // ë²½ë°€ê¸°
 	if (pPlayer->bWallPush)
 		if (pPlayer->bWallPush)
 		{
@@ -179,37 +179,37 @@ void MoveUp(char Maze[21][21], PPLAYER pPlayer)
 {
 	if (pPlayer->tPos.y - 1 >= 0)
 	{
-		// º®ÀÎÁö Ã¼Å©ÇÑ´Ù.
+		// ë²½ì¸ì§€ ì²´í¬í•œë‹¤.
 		if (Maze[pPlayer->tPos.y - 1][pPlayer->tPos.x] != '0' &&
 			Maze[pPlayer->tPos.y - 1][pPlayer->tPos.x] != '4')
 		{
 			--pPlayer->tPos.y;
 		}
 
-		// º® ¹Ğ±â°¡ °¡´ÉÇÏ°í ¹Ù·Î À­Ä­ÀÌ º®ÀÏ °æ¿ì 
+		// ë²½ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ê³  ë°”ë¡œ ìœ—ì¹¸ì´ ë²½ì¼ ê²½ìš° 
 		else if (pPlayer->bWallPush && Maze[pPlayer->tPos.y - 1][pPlayer->tPos.x] == '0')
 		{
-			// º® ¹Ğ±â°¡ ON »óÅÂÀÏ °æ¿ì 
+			// ë²½ ë°€ê¸°ê°€ ON ìƒíƒœì¼ ê²½ìš° 
 			if (pPlayer->bPushOnOff)
 			{
-				// À§ÀÇ À­Ä­ÀÌ 0º¸´Ù Å©°Å³ª °°À» °æ¿ì´Â ÀÎµ¦½º°¡ ÀÖ´Ù´Â ÀÇ¹Ì
+				// ìœ„ì˜ ìœ—ì¹¸ì´ 0ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì„ ê²½ìš°ëŠ” ì¸ë±ìŠ¤ê°€ ìˆë‹¤ëŠ” ì˜ë¯¸
 				if (pPlayer->tPos.y - 2 >= 0)
 				{
-					// À§ÀÇ À­Ä­ÀÌ ±æÀÌ¾î¾ß ¹Ğ±â°¡ °¡´ÉÇÏ´Ù. ±×·¯¹Ç·Î ±æÀÎÁö Ã¼Å©ÇÑ´Ù.
+					// ìœ„ì˜ ìœ—ì¹¸ì´ ê¸¸ì´ì–´ì•¼ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ê¸¸ì¸ì§€ ì²´í¬í•œë‹¤.
 					if (Maze[pPlayer->tPos.y - 2][pPlayer->tPos.x] == '0')
 					{
 						if (pPlayer->bTransparency)
 							--pPlayer->tPos.y;
 					}
 
-					// ±æÀÏ °æ¿ì º®À» ¹Ğ¾î³½´Ù.
+					// ê¸¸ì¼ ê²½ìš° ë²½ì„ ë°€ì–´ë‚¸ë‹¤.
 					else if (Maze[pPlayer->tPos.y - 2][pPlayer->tPos.x] == '1')
 					{
-						// À§ÀÇ À­Ä­À» º®À¸·Î ÇÏ°í
+						// ìœ„ì˜ ìœ—ì¹¸ì„ ë²½ìœ¼ë¡œ í•˜ê³ 
 						Maze[pPlayer->tPos.y - 2][pPlayer->tPos.x] = '0';
-						// À­Ä­Àº º®ÀÌ¾ú´Âµ¥ ±æ·Î ¸¸µé¾îÁØ´Ù.
+						// ìœ—ì¹¸ì€ ë²½ì´ì—ˆëŠ”ë° ê¸¸ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
 						Maze[pPlayer->tPos.y - 1][pPlayer->tPos.x] = '1';
-						// ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿½ÃÅ²´Ù.
+						// í”Œë ˆì´ì–´ë¥¼ ì´ë™ì‹œí‚¨ë‹¤.
 						--pPlayer->tPos.y;
 					}
 				}
@@ -218,7 +218,7 @@ void MoveUp(char Maze[21][21], PPLAYER pPlayer)
 					--pPlayer->tPos.y;
 			}
 
-			// º® ¹Ğ±â OFF »óÅÂÀÏ °æ¿ì
+			// ë²½ ë°€ê¸° OFF ìƒíƒœì¼ ê²½ìš°
 			else if (pPlayer->bTransparency)
 				--pPlayer->tPos.y;
 		}
@@ -235,37 +235,37 @@ void MoveDown(char Maze[21][21], PPLAYER pPlayer)
 {
 	if (pPlayer->tPos.y + 1 < 20)
 	{
-		// º®ÀÎÁö Ã¼Å©
+		// ë²½ì¸ì§€ ì²´í¬
 		if (Maze[pPlayer->tPos.y + 1][pPlayer->tPos.x] != '0' &&
 			Maze[pPlayer->tPos.y + 1][pPlayer->tPos.x] != '4')
 		{
 			++pPlayer->tPos.y;
 		}
 
-		// º® ¹Ğ±â°¡ °¡´ÉÇÏ°í ¹Ù·Î À­Ä­ÀÌ º®ÀÏ °æ¿ì 
+		// ë²½ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ê³  ë°”ë¡œ ìœ—ì¹¸ì´ ë²½ì¼ ê²½ìš° 
 		else if (pPlayer->bWallPush && Maze[pPlayer->tPos.y + 1][pPlayer->tPos.x] == '0')
 		{
-			// º® ¹Ğ±â°¡ ON »óÅÂÀÏ °æ¿ì 
+			// ë²½ ë°€ê¸°ê°€ ON ìƒíƒœì¼ ê²½ìš° 
 			if (pPlayer->bPushOnOff)
 			{
-				// À§ÀÇ À­Ä­ÀÌ 0º¸´Ù Å©°Å³ª °°À» °æ¿ì´Â ÀÎµ¦½º°¡ ÀÖ´Ù´Â ÀÇ¹Ì
+				// ìœ„ì˜ ìœ—ì¹¸ì´ 0ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì„ ê²½ìš°ëŠ” ì¸ë±ìŠ¤ê°€ ìˆë‹¤ëŠ” ì˜ë¯¸
 				if (pPlayer->tPos.y + 2 < 20)
 				{
-					// À§ÀÇ À­Ä­ÀÌ ±æÀÌ¾î¾ß ¹Ğ±â°¡ °¡´ÉÇÏ´Ù. ±×·¯¹Ç·Î ±æÀÎÁö Ã¼Å©ÇÑ´Ù.
+					// ìœ„ì˜ ìœ—ì¹¸ì´ ê¸¸ì´ì–´ì•¼ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ê¸¸ì¸ì§€ ì²´í¬í•œë‹¤.
 					if (Maze[pPlayer->tPos.y + 2][pPlayer->tPos.x] == '0')
 					{
 						if (pPlayer->bTransparency)
 							++pPlayer->tPos.y;
 					}
 
-					// ±æÀÏ °æ¿ì º®À» ¹Ğ¾î³½´Ù.
+					// ê¸¸ì¼ ê²½ìš° ë²½ì„ ë°€ì–´ë‚¸ë‹¤.
 					else if (Maze[pPlayer->tPos.y + 2][pPlayer->tPos.x] == '1')
 					{
-						// À§ÀÇ À­Ä­À» º®À¸·Î ÇÏ°í
+						// ìœ„ì˜ ìœ—ì¹¸ì„ ë²½ìœ¼ë¡œ í•˜ê³ 
 						Maze[pPlayer->tPos.y + 2][pPlayer->tPos.x] = '0';
-						// À­Ä­Àº º®ÀÌ¾ú´Âµ¥ ±æ·Î ¸¸µé¾îÁØ´Ù.
+						// ìœ—ì¹¸ì€ ë²½ì´ì—ˆëŠ”ë° ê¸¸ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
 						Maze[pPlayer->tPos.y + 1][pPlayer->tPos.x] = '1';
-						// ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿½ÃÅ²´Ù.
+						// í”Œë ˆì´ì–´ë¥¼ ì´ë™ì‹œí‚¨ë‹¤.
 						++pPlayer->tPos.y;
 					}
 				}
@@ -274,7 +274,7 @@ void MoveDown(char Maze[21][21], PPLAYER pPlayer)
 					++pPlayer->tPos.y;
 			}
 
-			// º® ¹Ğ±â OFF »óÅÂÀÏ °æ¿ì
+			// ë²½ ë°€ê¸° OFF ìƒíƒœì¼ ê²½ìš°
 			else if (pPlayer->bTransparency)
 				++pPlayer->tPos.y;
 		}		
@@ -297,30 +297,30 @@ void MoveLeft(char Maze[21][21], PPLAYER pPlayer)
 			--pPlayer->tPos.x;
 		}
 
-		// º® ¹Ğ±â°¡ °¡´ÉÇÏ°í ¹Ù·Î À­Ä­ÀÌ º®ÀÏ °æ¿ì 
+		// ë²½ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ê³  ë°”ë¡œ ìœ—ì¹¸ì´ ë²½ì¼ ê²½ìš° 
 		else if (pPlayer->bWallPush && Maze[pPlayer->tPos.y][pPlayer->tPos.x - 1] == '0')
 		{
-			// º® ¹Ğ±â°¡ ON »óÅÂÀÏ °æ¿ì 
+			// ë²½ ë°€ê¸°ê°€ ON ìƒíƒœì¼ ê²½ìš° 
 			if (pPlayer->bPushOnOff)
 			{
-				// À§ÀÇ À­Ä­ÀÌ 0º¸´Ù Å©°Å³ª °°À» °æ¿ì´Â ÀÎµ¦½º°¡ ÀÖ´Ù´Â ÀÇ¹Ì
+				// ìœ„ì˜ ìœ—ì¹¸ì´ 0ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì„ ê²½ìš°ëŠ” ì¸ë±ìŠ¤ê°€ ìˆë‹¤ëŠ” ì˜ë¯¸
 				if (pPlayer->tPos.x - 2 >= 0)
 				{
-					// À§ÀÇ À­Ä­ÀÌ ±æÀÌ¾î¾ß ¹Ğ±â°¡ °¡´ÉÇÏ´Ù. ±×·¯¹Ç·Î ±æÀÎÁö Ã¼Å©ÇÑ´Ù.
+					// ìœ„ì˜ ìœ—ì¹¸ì´ ê¸¸ì´ì–´ì•¼ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ê¸¸ì¸ì§€ ì²´í¬í•œë‹¤.
 					if (Maze[pPlayer->tPos.y][pPlayer->tPos.x - 2] == '0')
 					{
 						if (pPlayer->bTransparency)
 							--pPlayer->tPos.x;
 					}
 
-					// ±æÀÏ °æ¿ì º®À» ¹Ğ¾î³½´Ù.
+					// ê¸¸ì¼ ê²½ìš° ë²½ì„ ë°€ì–´ë‚¸ë‹¤.
 					else if (Maze[pPlayer->tPos.y][pPlayer->tPos.x - 2] == '1')
 					{
-						// À§ÀÇ À­Ä­À» º®À¸·Î ÇÏ°í
+						// ìœ„ì˜ ìœ—ì¹¸ì„ ë²½ìœ¼ë¡œ í•˜ê³ 
 						Maze[pPlayer->tPos.y][pPlayer->tPos.x - 2] = '0';
-						// À­Ä­Àº º®ÀÌ¾ú´Âµ¥ ±æ·Î ¸¸µé¾îÁØ´Ù.
+						// ìœ—ì¹¸ì€ ë²½ì´ì—ˆëŠ”ë° ê¸¸ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
 						Maze[pPlayer->tPos.y][pPlayer->tPos.x - 1] = '1';
-						// ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿½ÃÅ²´Ù.
+						// í”Œë ˆì´ì–´ë¥¼ ì´ë™ì‹œí‚¨ë‹¤.
 						--pPlayer->tPos.x;
 					}
 				}
@@ -329,7 +329,7 @@ void MoveLeft(char Maze[21][21], PPLAYER pPlayer)
 					--pPlayer->tPos.x;
 			}
 
-			// º® ¹Ğ±â OFF »óÅÂÀÏ °æ¿ì
+			// ë²½ ë°€ê¸° OFF ìƒíƒœì¼ ê²½ìš°
 			else if (pPlayer->bTransparency)
 				--pPlayer->tPos.x;
 		}
@@ -352,30 +352,30 @@ void MoveRight(char Maze[21][21], PPLAYER pPlayer)
 			++pPlayer->tPos.x;
 		}
 
-		// º® ¹Ğ±â°¡ °¡´ÉÇÏ°í ¹Ù·Î À­Ä­ÀÌ º®ÀÏ °æ¿ì 
+		// ë²½ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ê³  ë°”ë¡œ ìœ—ì¹¸ì´ ë²½ì¼ ê²½ìš° 
 		else if (pPlayer->bWallPush && Maze[pPlayer->tPos.y][pPlayer->tPos.x + 1] == '0')
 		{
-			// º® ¹Ğ±â°¡ ON »óÅÂÀÏ °æ¿ì 
+			// ë²½ ë°€ê¸°ê°€ ON ìƒíƒœì¼ ê²½ìš° 
 			if (pPlayer->bPushOnOff)
 			{
-				// À§ÀÇ À­Ä­ÀÌ 0º¸´Ù Å©°Å³ª °°À» °æ¿ì´Â ÀÎµ¦½º°¡ ÀÖ´Ù´Â ÀÇ¹Ì
+				// ìœ„ì˜ ìœ—ì¹¸ì´ 0ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ì„ ê²½ìš°ëŠ” ì¸ë±ìŠ¤ê°€ ìˆë‹¤ëŠ” ì˜ë¯¸
 				if (pPlayer->tPos.x + 2 < 20)
 				{
-					// À§ÀÇ À­Ä­ÀÌ ±æÀÌ¾î¾ß ¹Ğ±â°¡ °¡´ÉÇÏ´Ù. ±×·¯¹Ç·Î ±æÀÎÁö Ã¼Å©ÇÑ´Ù.
+					// ìœ„ì˜ ìœ—ì¹¸ì´ ê¸¸ì´ì–´ì•¼ ë°€ê¸°ê°€ ê°€ëŠ¥í•˜ë‹¤. ê·¸ëŸ¬ë¯€ë¡œ ê¸¸ì¸ì§€ ì²´í¬í•œë‹¤.
 					if (Maze[pPlayer->tPos.y][pPlayer->tPos.x + 2] == '0')
 					{
 						if (pPlayer->bTransparency)
 							++pPlayer->tPos.x;
 					}
 
-					// ±æÀÏ °æ¿ì º®À» ¹Ğ¾î³½´Ù.
+					// ê¸¸ì¼ ê²½ìš° ë²½ì„ ë°€ì–´ë‚¸ë‹¤.
 					else if (Maze[pPlayer->tPos.y][pPlayer->tPos.x + 2] == '1')
 					{
-						// À§ÀÇ À­Ä­À» º®À¸·Î ÇÏ°í
+						// ìœ„ì˜ ìœ—ì¹¸ì„ ë²½ìœ¼ë¡œ í•˜ê³ 
 						Maze[pPlayer->tPos.y][pPlayer->tPos.x + 2] = '0';
-						// À­Ä­Àº º®ÀÌ¾ú´Âµ¥ ±æ·Î ¸¸µé¾îÁØ´Ù.
+						// ìœ—ì¹¸ì€ ë²½ì´ì—ˆëŠ”ë° ê¸¸ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
 						Maze[pPlayer->tPos.y][pPlayer->tPos.x + 1] = '1';
-						// ÇÃ·¹ÀÌ¾î¸¦ ÀÌµ¿½ÃÅ²´Ù.
+						// í”Œë ˆì´ì–´ë¥¼ ì´ë™ì‹œí‚¨ë‹¤.
 						++pPlayer->tPos.x;
 					}
 				}
@@ -384,7 +384,7 @@ void MoveRight(char Maze[21][21], PPLAYER pPlayer)
 					++pPlayer->tPos.x;
 			}
 
-			// º® ¹Ğ±â OFF »óÅÂÀÏ °æ¿ì
+			// ë²½ ë°€ê¸° OFF ìƒíƒœì¼ ê²½ìš°
 			else if (pPlayer->bTransparency)
 				++pPlayer->tPos.x;
 		}
@@ -426,7 +426,7 @@ void MovePlayer(char Maze[21][21], PPLAYER pPlayer, char cInput)
 		break;
 	}
 }
-// Æ÷ÀÎÅÍ º¯¼ö¸¦ const·Î »ı¼ºÇÏ¸é °¡¸®Å°´Â ´ë»óÀÇ °ªÀ» º¯°æÇÒ ¼ö ¾ø´Ù.
+// í¬ì¸í„° ë³€ìˆ˜ë¥¼ constë¡œ ìƒì„±í•˜ë©´ ê°€ë¦¬í‚¤ëŠ” ëŒ€ìƒì˜ ê°’ì„ ë³€ê²½í•  ìˆ˜ ì—†ë‹¤.
 void CreateBomb(char Maze[21][21], const PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 {
 	if (*pBombCount == 5)
@@ -453,7 +453,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 	{
 		Maze[pBombArr[i].y][pBombArr[i].x] = '1';
 
-		// ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸Â¾ÒÀ» ¶§ ½ÃÀÛÁ¡À¸·Î º¸³½´Ù.
+		// í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ì•˜ì„ ë•Œ ì‹œì‘ì ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 		if (pPlayer->tPos.x == pBombArr[i].x && pPlayer->tPos.y == pBombArr[i].y)
 		{
 			pPlayer->tPos.x = 0;
@@ -466,7 +466,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 			{
 				if (Maze[pBombArr[i].y - j][pBombArr[i].x] == '0')
 				{
-					// ¾ÆÀÌÅÛ µå¶ø È®·üÀ» ±¸ÇÑ´Ù.
+					// ì•„ì´í…œ ë“œë í™•ë¥ ì„ êµ¬í•œë‹¤.
 					if (rand() % 100 < 20)
 					{
 						int iPercent = rand() % 100;
@@ -484,7 +484,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 						Maze[pBombArr[i].y - j][pBombArr[i].x] = '1';
 				}
 
-				// ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸Â¾ÒÀ» ¶§ ½ÃÀÛÁ¡À¸·Î º¸³½´Ù.
+				// í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ì•˜ì„ ë•Œ ì‹œì‘ì ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 				if (pPlayer->tPos.x == pBombArr[i].x && pPlayer->tPos.y == pBombArr[i].y - j)
 				{
 					pPlayer->tPos.x = 0;
@@ -497,7 +497,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 			{
 				if (Maze[pBombArr[i].y + j][pBombArr[i].x] == '0')
 				{
-					// ¾ÆÀÌÅÛ µå¶ø È®·üÀ» ±¸ÇÑ´Ù.
+					// ì•„ì´í…œ ë“œë í™•ë¥ ì„ êµ¬í•œë‹¤.
 					if (rand() % 100 < 20)
 					{
 						int iPercent = rand() % 100;
@@ -515,7 +515,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 						Maze[pBombArr[i].y + j][pBombArr[i].x] = '1';
 				}
 
-				// ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸Â¾ÒÀ» ¶§ ½ÃÀÛÁ¡À¸·Î º¸³½´Ù.
+				// í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ì•˜ì„ ë•Œ ì‹œì‘ì ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 				if (pPlayer->tPos.x == pBombArr[i].x && pPlayer->tPos.y == pBombArr[i].y + j)
 				{
 					pPlayer->tPos.x = 0;
@@ -532,7 +532,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 
 				}
 
-				// ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸Â¾ÒÀ» ¶§ ½ÃÀÛÁ¡À¸·Î º¸³½´Ù.
+				// í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ì•˜ì„ ë•Œ ì‹œì‘ì ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 				if (pPlayer->tPos.x == pBombArr[i].x - j && pPlayer->tPos.y == pBombArr[i].y)
 				{
 					pPlayer->tPos.x = 0;
@@ -545,7 +545,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 			{
 				if (Maze[pBombArr[i].y][pBombArr[i].x + j] == '0')
 				{
-					// ¾ÆÀÌÅÛ µå¶ø È®·üÀ» ±¸ÇÑ´Ù.
+					// ì•„ì´í…œ ë“œë í™•ë¥ ì„ êµ¬í•œë‹¤.
 					if (rand() % 100 < 20)
 					{
 						int iPercent = rand() % 100;
@@ -563,7 +563,7 @@ void Fire(char Maze[21][21], PPLAYER pPlayer, PPOINT pBombArr, int* pBombCount)
 						Maze[pBombArr[i].y][pBombArr[i].x + j] = '1';
 				}
 
-				// ÇÃ·¹ÀÌ¾î°¡ ÆøÅº¿¡ ¸Â¾ÒÀ» ¶§ ½ÃÀÛÁ¡À¸·Î º¸³½´Ù.
+				// í”Œë ˆì´ì–´ê°€ í­íƒ„ì— ë§ì•˜ì„ ë•Œ ì‹œì‘ì ìœ¼ë¡œ ë³´ë‚¸ë‹¤.
 				if (pPlayer->tPos.x == pBombArr[i].x + j && pPlayer->tPos.y == pBombArr[i].y)
 				{
 					pPlayer->tPos.x = 0;
@@ -580,7 +580,7 @@ int main()
 {
 	srand((unsigned int)time(0));
 
-	// 20 x 20 ¹Ì·Î »ı¼º
+	// 20 x 20 ë¯¸ë¡œ ìƒì„±
 	char	strMaze[21][21];
 	
 	PLAYER	tPlayer = {};
@@ -593,14 +593,14 @@ int main()
 
 	POINT tBombPos[5];
 	
-	// ¹Ì·Î ¼³Á¤
+	// ë¯¸ë¡œ ì„¤ì •
 	SetMaze(strMaze, &tPlayer, &tStarPos, &tEndPos);
 
 	while (true)
 	{
 		system("cls");
 
-		// ¹Ì·Î Ãâ·Â
+		// ë¯¸ë¡œ ì¶œë ¥
 		Output(strMaze, &tPlayer);
 
 		if (tPlayer.tPos.x == tEndPos.x && tPlayer.tPos.y == tEndPos.y)
