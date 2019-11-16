@@ -36,27 +36,6 @@ typedef struct _tagPlayer
 
 void SetMaze(char Maze[21][21],PPLAYER pPlayer, PPOINT pStartPos, PPOINT pEndPos)
 {
-	// MazeList.txt 파일을 읽어와서 미로 목록을 만든다.
-	FILE* pFile = NULL;
-
-	fopen_s(&pFile, "MazeList.txt", "rt");
-
-	if (pFile)
-	{
-		char	cCount;
-
-		fread(&cCount, 1, 1, pFile);
-
-		int iMazeCount = atoi(&cCount);
-
-		for (int i = 0; i < iMazeCount; ++i)
-		{
-
-		}
-
-		fclose(pFile);
-	}
-
 	pStartPos->x = 0;
 	pStartPos->y = 0;
 
