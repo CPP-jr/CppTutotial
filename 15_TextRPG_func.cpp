@@ -730,10 +730,10 @@ _tagItem CreateItem(const char* pName, ITEM_TYPE eType, int iMin,
 	switch (eType)
 	{
 	case IT_WEAPON:
-		strcpy_s(tItem.strName, "무기");
+		strcpy_s(tItem.strTypeName, "무기");
 		break;
 	case IT_ARMOR:
-		strcpy_s(tItem.strName, "방어구");
+		strcpy_s(tItem.strTypeName, "방어구");
 		break;
 	}
 
